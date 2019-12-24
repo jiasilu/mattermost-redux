@@ -556,6 +556,17 @@ export default class Client4 {
         return data;
     };
 
+    casLogIn = async (queryString: string) => {
+        this.trackEvent('api', 'api_users_login');
+
+        const {data} = await this.doFetchWithResponse(
+            `${this.getUsersRoute()}/cas_login?${queryString}`,
+            {method: 'get'}
+        );
+
+        return data;
+    };
+
     loginById = async (id: string, password: string, token = '', deviceId = '') => {
         this.trackEvent('api', 'api_users_login');
         const body: any = {
